@@ -45,6 +45,7 @@ type Driver struct {
 	ComputeNetwork   bool
 	FloatingIpPoolId string
 	IpVersion        int
+	CloudContainerId string
 	client           Client
 }
 
@@ -222,6 +223,12 @@ func (d *Driver) GetCreateFlags() []mcnflag.Flag {
 			Usage:  "OpenStack active timeout",
 			Value:  defaultActiveTimeout,
 		},
+		mcnflag.StringFlag{
+			EnvVar: "OS_CLOUD_CONTAINER",
+			Name:   "openstack-cloud-container-id",
+			Usage:  "CQSTR cloud container id",
+			Value:  "",
+		},
 	}
 }
 
@@ -285,6 +292,7 @@ func (d *Driver) SetConfigFromFlags(flags drivers.DriverOptions) error {
 	d.SSHPort = flags.Int("openstack-ssh-port")
 	d.KeyPairName = flags.String("openstack-keypair-name")
 	d.PrivateKeyFile = flags.String("openstack-private-key-file")
+	d.CloudContainerId = flags.String("openstack-cloud-container-id")
 
 	if flags.String("openstack-user-data-file") != "" {
 		userData, err := ioutil.ReadFile(flags.String("openstack-user-data-file"))
