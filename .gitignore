@@ -4,3 +4,4 @@ docker-machine*
 .idea/
 ./bin
 cover
+.*.un~
