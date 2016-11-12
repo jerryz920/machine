@@ -221,7 +221,7 @@ func (opts CreateOpts) ToServerCreateMap() (map[string]interface{}, error) {
 		server["accessIPv6"] = opts.AccessIPv6
 	}
 	if opts.CloudContainerId != "" {
-		server["container_tag"] = opts.CloudContainerId
+		server["container"] = opts.CloudContainerId
 	}
 
 	// We don't need security group when a cloud container is specified, as the
